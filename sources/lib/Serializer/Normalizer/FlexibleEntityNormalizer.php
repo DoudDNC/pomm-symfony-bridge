@@ -17,15 +17,18 @@ class FlexibleEntityNormalizer implements NormalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function normalize($object, $format = null, array $context = array())
-    {
+    public function normalize(
+        mixed $object,
+        string $format = null,
+        array $context = array()
+    ) : array|string|int|float|bool|\ArrayObject|null {
         return $object->extract();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function supportsNormalization($data, $format = null)
+    public function supportsNormalization(mixed $data, $format = null): bool
     {
         return $data instanceof FlexibleEntityInterface;
     }
