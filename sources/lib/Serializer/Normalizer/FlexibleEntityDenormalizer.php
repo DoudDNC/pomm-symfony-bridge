@@ -32,7 +32,7 @@ class FlexibleEntityDenormalizer implements DenormalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize(mixed $data, string $class, string $format = null, array $context = array()): mixed
     {
         if (isset($context['session:name'])) {
             $session = $this->pomm->getSession($context['session:name']);
@@ -53,7 +53,7 @@ class FlexibleEntityDenormalizer implements DenormalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsDenormalization($data, $type, $format = null)
+    public function supportsDenormalization(mixed $data, string $type, $format = null): bool
     {
         $reflection = new \ReflectionClass($type);
         $interfaces = $reflection->getInterfaces();

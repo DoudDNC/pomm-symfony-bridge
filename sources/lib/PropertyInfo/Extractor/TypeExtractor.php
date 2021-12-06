@@ -34,7 +34,7 @@ class TypeExtractor implements PropertyTypeExtractorInterface
     /**
      * @see PropertyTypeExtractorInterface
      */
-    public function getTypes($class, $property, array $context = array())
+    public function getTypes(string $class, string $property, array $context = array())
     {
         if (isset($context['session:name'])) {
             $session = $this->pomm->getSession($context['session:name']);

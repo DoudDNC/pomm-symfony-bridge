@@ -33,7 +33,7 @@ class ListExtractor implements PropertyListExtractorInterface
     /**
      * @see PropertyListExtractorInterface
      */
-    public function getProperties($class, array $context = array())
+    public function getProperties(string $class, array $context = array())
     {
         if (isset($context['session:name'])) {
             $session = $this->pomm->getSession($context['session:name']);
