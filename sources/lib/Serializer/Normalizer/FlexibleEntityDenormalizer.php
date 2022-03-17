@@ -55,6 +55,10 @@ class FlexibleEntityDenormalizer implements DenormalizerInterface
      */
     public function supportsDenormalization(mixed $data, string $type, $format = null): bool
     {
+        if (!class_exists($type)) {
+            return false;
+        }
+
         $reflection = new \ReflectionClass($type);
         $interfaces = $reflection->getInterfaces();
 
