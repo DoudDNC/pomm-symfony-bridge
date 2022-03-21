@@ -10,6 +10,7 @@
 namespace PommProject\SymfonyBridge\Serializer\Normalizer;
 
 use PommProject\Foundation\Pomm;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 /**
@@ -53,12 +54,15 @@ class FlexibleEntityDenormalizer implements DenormalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function supportsDenormalization(mixed $data, string $type, $format = null): bool
+    public function supportsDenormalization(mixed $data, string $type, string $format = null): bool
     {
+        if (!class_exists($type)) {
+            return false;
+        }
+
         $reflection = new \ReflectionClass($type);
         $interfaces = $reflection->getInterfaces();
 
-        // @TODO Use FlexibleEntityInterface::class with php >= 5.5
-        return isset($interfaces['PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface']);
+        return isset($interfaces[FlexibleEntityInterface::class]);
     }
 }
